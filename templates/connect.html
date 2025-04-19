@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter FIR Number</title>
+    <script>
+        window.onload = function() {
+            var firNo = prompt("Enter the FIR Number:");
+            if (firNo && firNo.trim() !== "") {
+                window.location.href = "/fir/" + encodeURIComponent(firNo.trim());
+            } else {
+                alert("❌ FIR number is required.");
+                window.location.href = "/option";  
+            }
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

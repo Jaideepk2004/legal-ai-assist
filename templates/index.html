@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalAssist - AI-Powered FIR Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #2d3748;
+        }
+        
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #0a3d62, #0c2461);
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            text-align: center;
+            padding: 20px 20px 30px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #c8d6e5);
+            -webkit-background-clip: text;
+            background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .logo span {
+            font-size: 13px;
+            color: #c8d6e5;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-menu {
+            padding: 20px 0;
+            flex-grow: 1;
+        }
+        
+        .nav-item {
+            padding: 14px 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2px 10px;
+            border-radius: 8px;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+        
+        .nav-item.active {
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .user-info {
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            background-color: rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0a3d62;
+            margin-right: 15px;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .user-details {
+            flex-grow: 1;
+        }
+        
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .user-role {
+            font-size: 13px;
+            color: #c8d6e5;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e5e8;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a3d62;
+        }
+        
+        .quick-actions {
+            display: flex;
+        }
+        
+        .action-btn {
+            background: linear-gradient(to right, #0a3d62, #0c2461);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            margin-left: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(10, 61, 98, 0.2);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(10, 61, 98, 0.3);
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Input Section Styles */
+        .input-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .input-section:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: #0a3d62;
+            font-weight: 600;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #0a3d62;
+            font-size: 22px;
+        }
+        
+        .input-controls {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: #f5f7fa;
+            padding: 5px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+        
+        .input-controls button {
+            background-color: transparent;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            margin-right: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .input-controls button i {
+            margin-right: 8px;
+        }
+        
+        .input-controls button.active {
+            background-color: #0a3d62;
+            color: white;
+            box-shadow: 0 2px 8px rgba(10, 61, 98, 0.3);
+        }
+        
+        .complaint-textarea {
+            width: 100%;
+            min-height: 180px;
+            border: 1px solid #e0e5e9;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 15px;
+            resize: vertical;
+            line-height: 1.6;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .complaint-textarea:focus {
+            outline: none;
+            border-color: #0a3d62;
+            box-shadow: 0 0 0 3px rgba(10, 61, 98, 0.1);
+        }
+        
+        .analyze-btn {
+            background: linear-gradient(to right, #0a3d62, #0c2461);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            float: right;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(10, 61, 98, 0.2);
+        }
+        
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(10, 61, 98, 0.3);
+        }
+        
+        /* Results Section Styles */
+        .results-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .results-section:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .tabs::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e0e5e9;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+        
+        .tab:hover {
+            color: #0a3d62;
+        }
+        
+        .tab.active {
+            color: #0a3d62;
+            font-weight: 600;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #0a3d62;
+            z-index: 2;
+        }
+        
+        .result-content {
+            display: flex;
+            flex-grow: 1;
+        }
+        
+        .sections-list {
+            flex: 1;
+            border-right: 1px solid #e0e5e9;
+            padding-right: 25px;
+            padding-bottom: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .section-item {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border-left: 4px solid #0a3d62;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .section-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+        }
+        
+        .section-item.active {
+            background-color: #e3f2fd;
+            box-shadow: 0 5px 15px rgba(10, 61, 98, 0.15);
+        }
+        
+        .section-item h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .section-item p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .confidence {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .high {
+            background-color: #e6f7ee;
+            color: #1e7e34;
+            border: 1px solid rgba(30, 126, 52, 0.2);
+        }
+        
+        .medium {
+            background-color: #fff3e0;
+            color: #e65100;
+            border: 1px solid rgba(230, 81, 0, 0.2);
+        }
+        
+        .section-details {
+            flex: 2;
+            padding-left: 30px;
+        }
+        
+        .detail-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e5e9;
+        }
+        
+        .detail-header h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #0a3d62;
+            font-weight: 700;
+        }
+        
+        .detail-header p {
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .detail-content h4 {
+            font-size: 18px;
+            margin: 20px 0 15px 0;
+            color: #0a3d62;
+            font-weight: 600;
+        }
+        
+        .detail-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: #2d3748;
+            font-size: 15px;
+        }
+        
+        .precedents {
+            margin-top: 25px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .precedent-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e5e9;
+        }
+        
+        .precedent-item:last-child {
+            border-bottom: none;
+        }
+        
+        .precedent-item p {
+            margin-bottom: 0;
+        }
+        
+        .precedent-item strong {
+            color: #0a3d62;
+        }
+        
+        .action-row {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 20px;
+            border-top: 1px solid #e0e5e9;
+        }
+        
+        .action-row button {
+            margin-left: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .accept-btn {
+            background: linear-gradient(to right, #0a3d62, #0c2461);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(10, 61, 98, 0.2);
+        }
+        
+        .accept-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(10, 61, 98, 0.3);
+        }
+        
+        .secondary-btn {
+            background-color: #f1f2f6;
+            border: 1px solid #e0e5e9;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #4a5568;
+        }
+        
+        .secondary-btn:hover {
+            background-color: #e0e5e9;
+            transform: translateY(-2px);
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .result-content {
+                flex-direction: column;
+            }
+            
+            .sections-list {
+                border-right: none;
+                border-bottom: 1px solid #e0e5e9;
+                padding-right: 0;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+                max-height: none;
+            }
+            
+            .section-details {
+                padding-left: 0;
+                padding-top: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 15px 0;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quick-actions {
+                margin-top: 15px;
+            }
+            
+            .action-btn {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+
+        /* Animation Effects */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-item, .input-section, .results-section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Status indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-indicator.online {
+            background-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Highlighting elements in the complaint text */
+        .highlight-text {
+            background-color: rgba(10, 61, 98, 0.1);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>LegalAssist</h1>
+                <span>AI-Powered FIR Assistant</span>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item active">
+                    <i class="fa-solid fa-clipboard"></i> New FIR
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-book"></i> Case Library
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-grip"></i> Dashboard
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-box-archive"></i> Search Laws
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-file-import"></i> Recent FIRs
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </div>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">SK</div>
+                <div class="user-details">
+                    <div class="user-name">Sub-Inspector Kumar</div>
+                    <div class="user-role">
+                        <span class="status-indicator online"></span>
+                        Central Police Station
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2 class="page-title">New First Information Report</h2>
+                <div class="quick-actions">
+                    <button class="action-btn"><i></i> Save Draft</button>
+                    <button class="action-btn"><i></i> Export</button>
+                </div>
+            </div>
+            
+            <!-- Complaint Input Section -->
+            <div class="input-section">
+                <h3 class="section-title">Complaint Description</h3>
+                <div class="input-controls">
+                    <button class="active">Type</button>
+                    <button>Upload Document</button>
+                </div>
+                <textarea id="complaintInput" class="complaint-textarea" placeholder="Enter the complaint details here..."></textarea>
+                <button onclick="submitComplaint()">Submit Complaint</button>
+                <div id="complaintOutput" class="complaint-output"></div>
+                <button class="analyze-btn" onclick="submitComplaint()">Analyze Complaint</button>
+
+                <div style="clear: both;"></div>
+            </div>
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="tabs">
+                    <div class="tab active">Recommended Sections</div>
+                    <div class="tab">Case Precedents</div>
+                    <div class="tab">Evidence Checklist</div>
+                </div>
+                
+                <div class="result-content">
+                    <div class="sections-list">
+                        <div class="section-item active">
+                            <h4>IPC Section 392 - Robbery</h4>
+                            <p>Whoever commits theft and causes or attempts to cause death, hurt or wrongful restraint.</p>
+                            <span class="confidence high">High Confidence (92%)</span>
+                        </div>
+                        
+                        <div class="section-item">
+                            <h4>IPC Section 394 - Voluntarily causing hurt in committing robbery</h4>
+                            <p>Robbery with injury during commission.</p>
+                            <span class="confidence high">High Confidence (88%)</span>
+                        </div>
+                        
+                        <div class="section-item">
+                            <h4>IPC Section 34 - Acts done by several persons in furtherance of common intention</h4>
+                            <p>For multiple offenders acting together.</p>
+                            <span class="confidence high">High Confidence (85%)</span>
+                        </div>
+                        
+                        <div class="section-item">
+                            <h4>IPC Section 379 - Punishment for theft</h4>
+                            <p>Alternative charge if robbery elements are challenged.</p>
+                            <span class="confidence medium">Medium Confidence (68%)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-details">
+                        <div class="detail-header">
+                            <h3>IPC Section 392 - Robbery</h3>
+                            <p>Whoever commits theft and, in committing theft, or in carrying away or attempting to carry away property obtained by theft, voluntarily causes or attempts to cause death, or hurt, or wrongful restraint, or fear of instant death, or of instant hurt, or of instant wrongful restraint, is said to commit "robbery".</p>
+                        </div>
+                        
+                        <div class="detail-content">
+                            <h4>Essential Elements Identified</h4>
+                            <p>✓ Theft of property (wallet, cash, phone) <br>
+                            ✓ Use of force/threat (knife threatening) <br>
+                            ✓ Causing hurt (injury to hand) <br>
+                            ✓ Fear of instant hurt (threatened with knife)</p>
+                            
+                            <h4>Maximum Punishment</h4>
+                            <p>Rigorous imprisonment up to 10 years and fine.</p>
+                            
+                            <h4>Why This Section Applies</h4>
+                            <p>The complaint clearly indicates a theft with the use of force and causing hurt. The assailants <span class="highlight-text">threatened the victim with a knife</span> and <span class="highlight-text">caused injury when he tried to resist</span>. This satisfies all elements of robbery under Section 392.</p>
+                            
+                            <div class="precedents">
+                                <h4>Relevant Precedents</h4>
+                                <div class="precedent-item">
+                                    <p><strong>State vs. Ranjit Kumar (2023)</strong>: Court upheld Section 392 charges in a similar case involving motorcycle-borne assailants using a knife.</p>
+                                </div>
+                                <div class="precedent-item">
+                                    <p><strong>Pramod vs. State (2021)</strong>: Supreme Court clarified that even minor injury during robbery satisfies the "hurt" element of Section 392.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="action-row">
+                                <button class="secondary-btn">View Alternatives</button>
+                                <button class="secondary-btn">Add Comment</button>
+                                <button class="accept-btn">Accept Section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submitComplaint() {
+            let userInput = document.getElementById("complaintInput").value;
+            let sectionDetailsDiv = document.querySelector(".section-details");
+            let sectionsListDiv = document.querySelector(".sections-list");
+    
+            if (!userInput.trim()) {
+                sectionDetailsDiv.innerHTML = "<p style='color: red;'>Please enter a complaint.</p>";
+                sectionsListDiv.innerHTML = "";
+                return;
+            }
+    
+            fetch("/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ complaint: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    sectionDetailsDiv.innerHTML = "<p>No relevant sections found.</p>";
+                    sectionsListDiv.innerHTML = "";
+                    return;
+                }
+    
+                // Top 1 Prediction
+                let topPrediction = data[0];
+                sectionDetailsDiv.innerHTML = `
+                    <div class="detail-header">
+                        <h3>${topPrediction.Section}</h3>
+                        <p>${topPrediction.Description}</p>
+                    </div>
+                `;
+    
+                // Remaining Predictions
+                sectionsListDiv.innerHTML = data.slice(1).map(section => `
+                    <div class="section-item">
+                        <h4>${section.Section}</h4>
+                        <p>${section.Description}</p>
+                    </div>
+                `).join('');
+            })
+            .catch(error => {
+                sectionDetailsDiv.innerHTML = "<p style='color: red;'>Error fetching results.</p>";
+                sectionsListDiv.innerHTML = "";
+                console.error("Error:", error);
+            });
+        }
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Focus</title>
+    <link rel="stylesheet" href="../static/css/option.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/complaint" class="column blue-column" id="complainant-column">
+            <div class="icon">
+                <!-- Person/User icon -->
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Head -->
+                    <circle cx="100" cy="70" r="40" fill="white"/>
+                    <!-- Body -->
+                    <path d="M100,110 C60,110 40,130 40,180 L160,180 C160,130 140,110 100,110" fill="white"/>
+                </svg>
+            </div>
+            <div class="title">Complainant Details</div>
+            <div class="subtitle">Emphasizes content creation and innovation</div>
+        </a>
+        
+        <div class="circle">
+            <img src="../static/images/logo_legalAssint.png" alt="" style="width: 70%; height: 70%; object-fit: contain;">
+        </div>
+        
+        <a href="/LegalAssist" class="column green-column" id="legal-column">
+            <div class="icon">
+                <!-- Simple geometric shapes icon (keeping the same icon) -->
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="40" y="40" width="50" height="50" fill="white" />
+                    <circle cx="150" cy="65" r="25" fill="white" />
+                    <polygon points="65,150 115,125 90,175" fill="white" />
+                    <rect x="125" y="125" width="40" height="40" rx="5" fill="white" transform="rotate(45 145 145)" />
+                </svg>
+            </div>
+            <div class="title">LegalAssist</div>
+            <div class="subtitle">Foundations of technology and science</div>
+        </a>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+            alert("{{ messages[0] }}");
+            </script>
+        {% endif %}
+        {% endwith %}
+    <script>
+        document.getElementById('genai-column').addEventListener('click', function(e) {
+            window.location.href = 'generative-ai.html';
+        });
+        
+        document.getElementById('math-column').addEventListener('click', function(e) {
+            window.location.href = 'mathematics.html';
+        });
+    </script>
+</body>
+</html>

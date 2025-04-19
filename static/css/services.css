@@ -1,0 +1,359 @@
+
+/* Global Styles */
+:root {
+    --navy-blue: #003366;
+    --light-navy: #004080;
+    --navy-accent: #002147;
+    --white: #ffffff;
+    --light-gray: #f4f4f4;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: var(--navy-blue);
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-title {
+display: flex;
+align-items: center;
+}
+
+.logo {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+object-fit: cover;
+}
+.department-title {
+color: #f8f2f2;
+font-size: 24px;
+font-weight: bold;
+margin-left: 15px;
+text-transform: uppercase;
+}
+/* Navigation */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    color: #a3c6ff;
+}
+
+/* Main Content */
+.main-content {
+    padding: 50px 0;
+}
+
+.services-section h1 {
+    color: var(--navy-blue);
+    font-size: 36px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--navy-blue);
+    padding-bottom: 10px;
+}
+
+.services-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.services-intro p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* Service Cards */
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.service-card {
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-img {
+    height: 200px;
+    background-color: var(--navy-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.service-content {
+    padding: 25px;
+}
+
+.service-content h2 {
+    color: var(--navy-blue);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.service-content p {
+    margin-bottom: 20px;
+}
+
+.service-features {
+    margin-top: 15px;
+}
+
+.service-features h3 {
+    color: var(--navy-blue);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.feature-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.feature-list li {
+    padding: 8px 0;
+    position: relative;
+    padding-left: 25px;
+}
+
+.feature-list li:before {
+    content: "✓";
+    color: var(--navy-blue);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* How It Works Section */
+.how-it-works {
+    background-color: var(--light-gray);
+    padding: 50px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+.how-it-works h2 {
+    color: var(--navy-blue);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.step {
+    text-align: center;
+    position: relative;
+    width: 20%;
+}
+
+.step:not(:last-child):after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    right: -30%;
+    width: 60%;
+    height: 2px;
+    background-color: var(--navy-blue);
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 auto 15px;
+}
+
+.step-title {
+    color: var(--navy-blue);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Testimonials */
+.testimonials {
+    margin-bottom: 50px;
+}
+
+.testimonials h2 {
+    color: var(--navy-blue);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.testimonial {
+    background-color: var(--white);
+    border-left: 4px solid var(--navy-blue);
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: var(--navy-blue);
+}
+
+.testimonial-role {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links ul li a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #a3c6ff;
+}
+
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .service-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .step {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    
+    .step:not(:last-child):after {
+        top: auto;
+        bottom: -25px;
+        right: auto;
+        width: 2px;
+        height: 50px;
+        left: 50%;
+    }
+    
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPC Section Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+    .summary-box {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .back-button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+    .back-button:hover {
+      background-color: #45a049;
+    }
+    .book-no {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+    .line-input {
+      margin-top: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>IPC Section Summary</h1>
+
+  <form method="POST" action="/accept">
+    <div class="summary-box">
+      <span class="number">1.</span>
+      <h2>Summary</h2>
+      <p>{{ summary }}</p>
+      <input type="hidden" name="summary" value="{{ summary }}">
+    </div>
+
+    <div class="book-no">
+      <span class="number">2.</span>
+      <span class="label-text">FIR No.</span>
+      <br>
+      <input type="text" name="fir_no" class="line-input" style="width: 200px;" required>
+    </div>
+
+    <button type="submit" class="back-button">Save Summary & FIR</button>
+    <a href="/connect" class="back-button">Generate FIR</a>
+  </form>
+
+</body>
+</html>

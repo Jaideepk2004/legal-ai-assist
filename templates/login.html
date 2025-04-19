@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telangana Police Department - Login</title>
+  <link rel="stylesheet" href="../static/css/login.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <div class="header">
+    <div class="logo-title">
+      <img src="../static/images/emblem.jpg" alt="Telangana Police Logo" class="logo">
+      <div class="department-title">Telangana Police Department</div>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/services">Services</a>
+      <a href="/contact">Contact</a>
+      <a href="/register"><button class="register-btn">Register</button></a>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="login-container">
+      <div class="login-title">CITIZEN LOGIN</div>
+      
+      <form method="post" action="/login" id="loginForm">
+        <div class="form-row">
+          <div class="form-label">Login ID:</div>
+          <div class="form-field">
+            <input type="text" name="login_id" placeholder="Enter your Login ID">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label">Password:</div>
+          <div class="form-field">
+            <input type="password" name="password" placeholder="Enter your Password">
+          </div>
+        </div>
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+        <div class="submit-row">
+            <button type="submit" class="login-btn">Login</button>
+          </div>          
+      </form>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+    <span>© 2020 Police Computer Services & Standardisation, TG Police Department.</span>
+    <span class="footer-right">You are visitor no. 10855967</span>
+  </div>
+</body>
+</html>

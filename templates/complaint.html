@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/complaint.css">
+    <title>Format of the F.I.R.</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Complainant Details</h1>
+        <form method="POST" action="/complaint">
+            <div class="form-header">
+                <div></div>
+                <div class="book-no">
+                    <span class="label-text">FIR No.</span>
+                    <input type="text" name="fir_no" class="line-input" style="width: 200px;">
+                </div>
+            </div>
+            <div class="form-title">First Information Report</div>
+            <div class="form-subtitle">First Information of a Cognizable Crime Reported under Section 154, Criminal Penal Code</div>
+
+            <div class="form-field inline-fields">
+                <span class="label-text">Police Station</span>
+                <input type="text" name="police_station" class="line-input" style="width: 35%;">
+                <span class="label-text">District</span>
+                <input type="text" name="district" class="line-input" style="width: 35%;">
+                <span class="label-text">No</span>
+                <input type="text"  name="station_no" class="line-input" style="width: 15%;">
+            </div>
+
+            <div class="form-field inline-fields">
+                <span class="label-text">Date and hour of Occurrence</span>
+                <input type="text"name="occurrence_datetime" class="line-input" style="width: 70%;">
+            </div>
+
+            <div class="form-field numbered-item">
+                <span class="number">1.</span>
+                <label>Name and residence of informer and complainant.</label>
+                <input type="text" name="informer_details" class="line-input">
+            </div>
+
+            <div class="form-field numbered-item">
+                <span class="number">2.</span>
+                <label>Place of occurrence and distance and direction from the Police Station.</label>
+                <input type="text"name="place_of_occurrence" class="line-input">
+            </div>
+
+            <div class="form-field numbered-item">
+                <span class="number">3.</span>
+                <label>Name & Address of the Criminal.</label>
+                <input type="text" name="criminal_details" class="line-input">
+            </div>
+
+            <div class="form-field numbered-item">
+                <span class="number">4.</span>
+                <label>Steps taken regarding investigation explanation of delay in regarding information.</label>
+                <input type="text"  name="investigation_steps" class="line-input">
+            </div>
+
+            <div class="form-field numbered-item">
+                <span class="number">5.</span>
+                <label>Date and Time of despatch from Police Station.</label>
+                <input type="text" name="despatch_datetime" class="line-input">
+            </div>
+
+            <div class="form-field inline-fields">
+                <span class="label-text">Designation</span>
+                <input type="text" name="designation" class="line-input" class="line-input" style="width: 70%;">
+            </div>
+            <button type="submit">Submit Complaint</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+            alert("{{ messages[0] }}");
+            </script>
+        {% endif %}
+        {% endwith %}
+    </div>
+    <script>
+        // Set current date and time in the "Date and hour when reported" field
+        function setCurrentDateTime() {
+            const now = new Date();
+            
+            // Format the date and time
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true
+            };
+            
+            const formattedDateTime = now.toLocaleDateString('en-US', options);
+            document.getElementById('currentDateTime').value = formattedDateTime;
+        }
+
+        // Make all input fields automatically expand as you type
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date and time when the page loads
+            setCurrentDateTime();
+            
+            const inputs = document.querySelectorAll('input[type="text"], .line-input:not(#currentDateTime)');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.backgroundColor = "#ffffdd";
+                    this.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.backgroundColor = "transparent";
+                    this.style.boxShadow = "none";
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+
+body {
+    font-family: 'Calibri', Arial, sans-serif;
+    background-color: #f2f6fc; /* Light yellow background */
+    margin: 0;
+    padding: 20px;
+    color: #003366;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #f1f1ed;
+}
+h1 {
+    text-align: center;
+    color: #003366; /* Dark blue color */
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #003366;
+    font-size: 24px;
+}
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.form-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    color: #003366;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.form-subtitle {
+    text-align: center;
+    margin-bottom: 25px;
+    font-style: italic;
+    border-bottom: 1px dotted #aaa;
+    padding-bottom: 15px;
+    color: #333;
+}
+.form-field {
+    margin-bottom: 20px;
+    position: relative;
+}
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003366;
+}
+.form-field input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+.form-field .line-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #003366;
+    background-color: transparent;
+    padding: 8px 0;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+.form-field .line-input:focus {
+    border-bottom: 2px solid #003366;
+    outline: none;
+    background-color: rgba(255, 255, 204, 0.5);
+}
+.form-field textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #003366;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: vertical;
+    background-color: #fffef2;
+    font-family: 'Calibri', Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+.form-field textarea:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+    background-color: #fffff0;
+}
+.inline-fields {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.note {
+    margin-top: 25px;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    background-color: #fffde8;
+    border-radius: 4px;
+}
+.section-title {
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0 20px;
+    color: #003366;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+.section-title:after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 2px;
+    background: #003366;
+    margin: 8px auto 0;
+}
+.authentic-info {
+    margin-top: 20px;
+    text-align: justify;
+    font-size: 0.95em;
+    line-height: 1.6;
+    padding: 15px;
+    background-color: #fffde8;
+    border-radius: 4px;
+    border-left: 3px solid #003366;
+}
+.label-text {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.book-no {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+/* Added styling for number markers */
+.numbered-item {
+    position: relative;
+    padding-left: 25px;
+}
+.numbered-item .number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
+.current-date-time {
+    color: #003366;
+    font-weight: bold;
+}

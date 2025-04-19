@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalAssist - AI-Powered FIR Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../static/css/LegalAssist.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>LegalAssist</h1>
+                <span>AI-Powered FIR Assistant</span>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item active">
+                    <i class="fa-solid fa-clipboard"></i><a href="/complaint" style="color: white; text-decoration: none;"> New FIR</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-book"></i><a href="/" style="color: white; text-decoration: none;"> Home</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-grip"></i> <a href="/about" style="color: white; text-decoration: none;">About Us</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-box-archive"></i><a href="/services" style="color: white; text-decoration: none;"> Services</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-file-import"></i><a href="/contact" style="color: white; text-decoration: none;"> Contact</a>
+                </div>
+            </div>
+                    
+            <div class="user-info">
+                <div class="user-avatar">LA</div>
+                <div class="user-details">
+                    <div class="user-name"></div>
+                    <div class="user-role">
+                        <span class="status-indicator online"></span>
+                        LegalAssist
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2 class="page-title">New First Information Report</h2>
+            </div>
+            
+            <!-- Complaint Input Section -->
+            <div class="input-section">
+                <h3 class="section-title">Complaint Description</h3>
+                <textarea id="complaintInput" class="complaint-textarea" placeholder="Enter the complaint details here..."></textarea>
+                <div id="complaintOutput" class="complaint-output"></div>
+                <button class="analyze-btn" onclick="submitComplaint()">Analyze Complaint</button>
+
+                <div style="clear: both;"></div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="tabs">
+                    <div class="tab active">Recommended Sections</div>
+                    <div class="tab">Case Precedents</div>
+                    <div class="tab">Evidence Checklist</div>
+                </div>
+                
+                <div class="result-content">
+                    <div class="sections-list">
+                        <div class="section-item active">
+                            <h4>IPC Section 392 - Robbery</h4>
+                            <p>Whoever commits theft and causes or attempts to cause death, hurt or wrongful restraint.</p>
+                            <span class="confidence high">High Confidence (92%)</span>
+                        </div>
+                        
+                        <div class="section-item">
+                            <h4>IPC Section 394 - Voluntarily causing hurt in committing robbery</h4>
+                            <p>Robbery with injury during commission.</p>
+                            <span class="confidence high">High Confidence (88%)</span>
+                        </div>
+                        
+                        <div class="section-item">
+                            <h4>IPC Section 34 - Acts done by several persons in furtherance of common intention</h4>
+                            <p>For multiple offenders acting together.</p>
+                            <span class="confidence high">High Confidence (85%)</span>
+                        </div>
+                        
+                        <div class="section-item">
+                            <h4>IPC Section 379 - Punishment for theft</h4>
+                            <p>Alternative charge if robbery elements are challenged.</p>
+                            <span class="confidence medium">Medium Confidence (68%)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-details">
+                        <div class="detail-header">
+                            <h3>IPC Section 392 - Robbery</h3>
+                            <p>Whoever commits theft and, in committing theft, or in carrying away or attempting to carry away property obtained by theft, voluntarily causes or attempts to cause death, or hurt, or wrongful restraint, or fear of instant death, or of instant hurt, or of instant wrongful restraint, is said to commit "robbery".</p>
+                        </div>
+                        
+                        <div class="detail-content">
+                            <h4>Essential Elements Identified</h4>
+                            <p>✓ Theft of property (wallet, cash, phone) <br>
+                            ✓ Use of force/threat (knife threatening) <br>
+                            ✓ Causing hurt (injury to hand) <br>
+                            ✓ Fear of instant hurt (threatened with knife)</p>
+                            
+                            <h4>Maximum Punishment</h4>
+                            <p>Rigorous imprisonment up to 10 years and fine.</p>
+                            
+                            <h4>Why This Section Applies</h4>
+                            <p>The complaint clearly indicates a theft with the use of force and causing hurt. The assailants <span class="highlight-text">threatened the victim with a knife</span> and <span class="highlight-text">caused injury when he tried to resist</span>. This satisfies all elements of robbery under Section 392.</p>
+                            
+                            <div class="precedents">
+                                <h4>Relevant Precedents</h4>
+                                <div class="precedent-item">
+                                    <p><strong>State vs. Ranjit Kumar (2023)</strong>: Court upheld Section 392 charges in a similar case involving motorcycle-borne assailants using a knife.</p>
+                                </div>
+                                <div class="precedent-item">
+                                    <p><strong>Pramod vs. State (2021)</strong>: Supreme Court clarified that even minor injury during robbery satisfies the "hurt" element of Section 392.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="action-row">
+                                <a href="/fir"><button class="accept-btn">Accept Section</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submitComplaint() {
+            let userInput = document.getElementById("complaintInput").value;
+            let sectionDetailsDiv = document.querySelector(".section-details");
+            let sectionsListDiv = document.querySelector(".sections-list");
+    
+            if (!userInput.trim()) {
+                sectionDetailsDiv.innerHTML = "<p style='color: red;'>Please enter a complaint.</p>";
+                sectionsListDiv.innerHTML = "";
+                return;
+            }
+    
+            fetch("/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ complaint: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    sectionDetailsDiv.innerHTML = "<p>No relevant sections found.</p>";
+                    sectionsListDiv.innerHTML = "";
+                    return;
+                }
+    
+                // Top 1 Prediction
+                let topPrediction = data[0];
+                sectionDetailsDiv.innerHTML = `
+                    <div class="detail-header">
+                        <h3>${topPrediction.Section}</h3>
+                        <p>${topPrediction.Description}</p>
+                        <button class="accept-btn" onclick="acceptSummary()">Accept Section</button>
+
+                    </div>
+                `;
+    
+                // Remaining Predictions
+                sectionsListDiv.innerHTML = data.slice(1).map(section => `
+                    <div class="section-item">
+                        <h4>${section.Section}</h4>
+                        <p>${section.Description}</p>
+                    </div>
+                `).join('');
+            })
+            .catch(error => {
+                sectionDetailsDiv.innerHTML = "<p style='color: red;'>Error fetching results.</p>";
+                sectionsListDiv.innerHTML = "";
+                console.error("Error:", error);
+            });
+        }
+        function acceptSummary() {
+        fetch("/accept", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(error => {
+            console.error("Error summarizing:", error);
+            alert("Error summarizing: " + error.message);
+        });
+    }
+    </script>
+    
+    
+    
+</body>
+</html>
