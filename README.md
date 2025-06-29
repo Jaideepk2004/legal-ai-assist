@@ -29,8 +29,9 @@ Our solution is built with a robust full-stack architecture using:
 * **Backend:** Python with Flask Framework
 * **AI/NLP Engine:** Trained on legal texts to classify and match incident descriptions with relevant laws
 * **Data Storage:**
-       * CSV file to store legal sections, and case references
-       * XAMPP to store user data , complaint details and fir detail for each user
+
+  * **CSV files:** To store legal sections and case references
+  * **XAMPP:** To store user data, complaint details, and FIR records for each user
 * **Authentication:** Flask-Login for secure user registration and login
 
 ## 💡 Overcoming the Challenges
