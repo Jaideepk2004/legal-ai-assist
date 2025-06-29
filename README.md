@@ -1,7 +1,3 @@
-Here's your updated **README** for the **Legal Assist** project, integrating the detailed problem statement and solution context you provided:
-
----
-
 # 🛡️ Legal Assist – Legal Guidance
 
 ## 🔥 Inspiration
